@@ -3,7 +3,7 @@
 ZONE=us-west1-c
 
 gcloud config set compute/zone $ZONE
-gcloud compute networks create jenkins --mode auto
+gcloud compute networks create jenkins
 gcloud container clusters create jenkins-cd \
         --network jenkins \
         --scopes "https://www.googleapis.com/auth/projecthosting,storage-rw"
