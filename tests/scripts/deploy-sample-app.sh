@@ -16,5 +16,5 @@ export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingr
 curl --retry 5 --retry-delay 5 http://$FRONTEND_SERVICE_IP/version | grep 1.0.0
 
 # Cleanup resources
-kubectl delete ns production
-sleep 120
+# kubectl delete ns production
+# sleep 120

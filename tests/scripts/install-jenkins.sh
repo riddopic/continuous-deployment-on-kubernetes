@@ -1,4 +1,8 @@
 #!/bin/bash -xe
+
+ZONE=us-west1-c
+
+gcloud config set compute/zone $ZONE
 gcloud compute networks create jenkins --mode auto
 gcloud container clusters create jenkins-cd \
         --network jenkins \
@@ -7,7 +11,7 @@ gcloud container clusters list
 gcloud container clusters get-credentials jenkins-cd
 kubectl cluster-info
 gcloud compute images create jenkins-home-image --source-uri https://storage.googleapis.com/solutions-public-assets/jenkins-cd/jenkins-home-v3.tar.gz
-gcloud compute disks create jenkins-home --image jenkins-home-image --zone $zone
+gcloud compute disks create jenkins-home --image jenkins-home-image --zone $ZONE	
 PASSWORD=`openssl rand -base64 15`; echo "Your password is $PASSWORD"; sed -i.bak s#CHANGE_ME#$PASSWORD# jenkins/k8s/options
 kubectl create ns jenkins
 kubectl create secret generic jenkins --from-file=jenkins/k8s/options --namespace=jenkins
@@ -25,5 +29,5 @@ kubectl describe ingress --namespace=jenkins jenkins | grep backends | grep HEAL
 curl http://$INGRESS_IP
 
 # Cleanup resources
-kubectl delete ns jenkins
-sleep 120
+# kubectl delete ns jenkins
+# sleep 120
