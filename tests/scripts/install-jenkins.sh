@@ -1,7 +1,6 @@
 #!/bin/bash -xe
 
 ZONE=us-west1-c
-
 gcloud config set compute/zone $ZONE
 gcloud compute networks create jenkins
 gcloud container clusters create jenkins-cd \

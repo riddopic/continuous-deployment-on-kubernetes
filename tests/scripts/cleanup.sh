@@ -1,4 +1,8 @@
 #!/bin/bash -xe
+
+ZONE=us-west1-c
+gcloud config set compute/zone $ZONE
+
 printf "y\n" | gcloud container clusters delete jenkins-cd || true
 printf "y\n" | gcloud compute images delete jenkins-home-image || true
 printf "y\n" | gcloud compute disks delete jenkins-home || true

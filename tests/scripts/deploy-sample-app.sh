@@ -1,4 +1,7 @@
 #!/bin/bash -xe
+
+ZONE=us-west1-c
+gcloud config set compute/zone $ZONE
 gcloud container clusters get-credentials jenkins-cd
 kubectl cluster-info
 
